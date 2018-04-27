@@ -159,28 +159,6 @@ RUN if [ ${INSTALL_SOAP} = true ]; then \
   apt-get -y install libxml2-dev php${PHP_VERSION}-soap \
 ;fi
 
-###########################################################################
-# LDAP:
-###########################################################################
-
-ARG INSTALL_LDAP=false
-ARG PHP_VERSION=${PHP_VERSION}
-
-RUN if [ ${INSTALL_LDAP} = true ]; then \
-    apt-get install -y libldap2-dev && \
-    apt-get install -y php${PHP_VERSION}-ldap \
-;fi
-
-###########################################################################
-# IMAP:
-###########################################################################
-
-ARG INSTALL_IMAP=false
-ARG PHP_VERSION=${PHP_VERSION}
-
-RUN if [ ${INSTALL_IMAP} = true ]; then \
-    apt-get install -y php${PHP_VERSION}-imap \
-;fi
 
 ###########################################################################
 # xDebug:
@@ -201,22 +179,6 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
 # ADD for REMOTE debugging
 COPY ./xdebug.ini /etc/php/${PHP_VERSION}/cli/conf.d/xdebug.ini
 
-###########################################################################
-# Blackfire:
-###########################################################################
-
-ARG INSTALL_BLACKFIRE=false
-ARG BLACKFIRE_CLIENT_ID
-ENV BLACKFIRE_CLIENT_ID ${BLACKFIRE_CLIENT_ID}
-ARG BLACKFIRE_CLIENT_TOKEN
-ENV BLACKFIRE_CLIENT_TOKEN ${BLACKFIRE_CLIENT_TOKEN}
-
-RUN if [ ${INSTALL_XDEBUG} = false -a ${INSTALL_BLACKFIRE} = true ]; then \
-    curl -L https://packagecloud.io/gpg.key | apt-key add - && \
-    echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
-    apt-get update -yqq && \
-    apt-get install blackfire-agent \
-;fi
 
 ###########################################################################
 # ssh:
@@ -240,34 +202,6 @@ RUN if [ ${INSTALL_WORKSPACE_SSH} = true ]; then \
 ;fi
 
 ###########################################################################
-# MongoDB:
-###########################################################################
-
-ARG INSTALL_MONGO=false
-ARG PHP_VERSION=${PHP_VERSION}
-
-RUN if [ ${INSTALL_MONGO} = true ]; then \
-    # Install the mongodb extension
-    pecl -q install mongodb && \
-    echo "extension=mongodb.so" >> /etc/php/${PHP_VERSION}/mods-available/mongodb.ini && \
-    ln -s /etc/php/${PHP_VERSION}/mods-available/mongodb.ini /etc/php/${PHP_VERSION}/cli/conf.d/30-mongodb.ini \
-;fi
-
-###########################################################################
-# AMQP:
-###########################################################################
-
-ARG INSTALL_AMQP=false
-ARG PHP_VERSION=${PHP_VERSION}
-
-RUN if [ ${INSTALL_AMQP} = true ]; then \
-    apt-get install librabbitmq-dev -y && \
-    pecl -q install amqp && \
-    echo "extension=amqp.so" >> /etc/php/${PHP_VERSION}/mods-available/amqp.ini && \
-    ln -s /etc/php/${PHP_VERSION}/mods-available/amqp.ini /etc/php/${PHP_VERSION}/cli/conf.d/30-amqp.ini \
-;fi
-
-###########################################################################
 # PHP REDIS EXTENSION
 ###########################################################################
 
@@ -280,53 +214,6 @@ RUN if [ ${INSTALL_PHPREDIS} = true ]; then \
     echo "extension=redis.so" >> /etc/php/${PHP_VERSION}/mods-available/redis.ini && \
     phpenmod redis \
 ;fi
-
-###########################################################################
-# Swoole EXTENSION
-###########################################################################
-
-ARG INSTALL_SWOOLE=false
-ARG PHP_VERSION=${PHP_VERSION}
-
-RUN if [ ${INSTALL_SWOOLE} = true ]; then \
-    # Install Php Swoole Extension
-    pecl -q install swoole && \
-    echo "extension=swoole.so" >> /etc/php/${PHP_VERSION}/mods-available/swoole.ini && \
-    ln -s /etc/php/${PHP_VERSION}/mods-available/swoole.ini /etc/php/${PHP_VERSION}/cli/conf.d/20-swoole.ini \
-;fi
-
-###########################################################################
-# Drush:
-###########################################################################
-
-USER root
-
-ARG INSTALL_DRUSH=false
-
-RUN if [ ${INSTALL_DRUSH} = true ]; then \
-    apt-get -y install mysql-client && \
-    # Install Drush 8 with the phar file.
-    curl -fsSL -o /usr/local/bin/drush https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar | bash && \
-    chmod +x /usr/local/bin/drush && \
-    drush core-status \
-;fi
-
-###########################################################################
-# Drupal Console:
-###########################################################################
-
-USER root
-
-ARG INSTALL_DRUPAL_CONSOLE=false
-
-RUN if [ ${INSTALL_DRUPAL_CONSOLE} = true ]; then \
-    apt-get -y install mysql-client && \
-    curl https://drupalconsole.com/installer -L -o drupal.phar && \
-    mv drupal.phar /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal \
-;fi
-
-USER laradock
 
 ###########################################################################
 # Node / NVM:

@@ -154,7 +154,7 @@ NGINX_PHP_UPSTREAM_PORT=9000
 
 ### MYSQL #################################################
 
-MYSQL_VERSION=latest
+MYSQL_VERSION=5.6
 MYSQL_DATABASE=default
 MYSQL_USER=default
 MYSQL_PASSWORD=secret
