@@ -133,7 +133,7 @@ PHP_FPM_INSTALL_GMP=false
 PHP_FPM_INSTALL_EXIF=false
 PHP_FPM_INSTALL_AEROSPIKE=false
 PHP_FPM_INSTALL_PGSQL=false
-PHP_FPM_INSTALL_POSTGRES=false
+PHP_FPM_INSTALL_POSTGRES=true
 PHP_FPM_INSTALL_GHOSTSCRIPT=false
 PHP_FPM_INSTALL_LDAP=false
 PHP_FPM_INSTALL_SWOOLE=false
@@ -152,17 +152,6 @@ NGINX_SITES_PATH=./nginx/sites/
 NGINX_PHP_UPSTREAM_CONTAINER=php-fpm
 NGINX_PHP_UPSTREAM_PORT=9000
 
-### APACHE ################################################
-
-APACHE_HOST_HTTP_PORT=80
-APACHE_HOST_HTTPS_PORT=443
-APACHE_HOST_LOG_PATH=./logs/apache2
-APACHE_SITES_PATH=./apache2/sites
-APACHE_PHP_UPSTREAM_CONTAINER=php-fpm
-APACHE_PHP_UPSTREAM_PORT=9000
-APACHE_PHP_UPSTREAM_TIMEOUT=60
-APACHE_DOCUMENT_ROOT=/var/www/
-
 ### MYSQL #################################################
 
 MYSQL_VERSION=latest
@@ -177,178 +166,9 @@ MYSQL_ENTRYPOINT_INITDB=./mysql/docker-entrypoint-initdb.d
 
 REDIS_PORT=6379
 
-### Percona ###############################################
-
-PERCONA_DATABASE=homestead
-PERCONA_USER=homestead
-PERCONA_PASSWORD=secret
-PERCONA_PORT=3306
-PERCONA_ROOT_PASSWORD=root
-PERCONA_ENTRYPOINT_INITDB=./percona/docker-entrypoint-initdb.d
-
-### MSSQL #################################################
-
-MSSQL_DATABASE=homestead
-MSSQL_PASSWORD=yourStrong(!)Password
-MSSQL_PORT=1433
-
-### MARIADB ###############################################
-
-MARIADB_DATABASE=default
-MARIADB_USER=default
-MARIADB_PASSWORD=secret
-MARIADB_PORT=3306
-MARIADB_ROOT_PASSWORD=root
-MARIADB_ENTRYPOINT_INITDB=./mariadb/docker-entrypoint-initdb.d
-
 ### POSTGRES ##############################################
 
 POSTGRES_DB=default
 POSTGRES_USER=default
 POSTGRES_PASSWORD=secret
 POSTGRES_PORT=5432
-
-### RABBITMQ ##############################################
-
-RABBITMQ_NODE_HOST_PORT=5672
-RABBITMQ_MANAGEMENT_HTTP_HOST_PORT=15672
-RABBITMQ_MANAGEMENT_HTTPS_HOST_PORT=15671
-RABBITMQ_DEFAULT_USER=guest
-RABBITMQ_DEFAULT_PASS=guest
-
-### ELASTICSEARCH #########################################
-
-ELASTICSEARCH_HOST_HTTP_PORT=9200
-ELASTICSEARCH_HOST_TRANSPORT_PORT=9300
-
-### KIBANA ################################################
-
-KIBANA_HTTP_PORT=5601
-
-### MEMCACHED #############################################
-
-MEMCACHED_HOST_PORT=11211
-
-### BEANSTALKD CONSOLE ####################################
-
-BEANSTALKD_CONSOLE_BUILD_PATH=./beanstalkd-console
-BEANSTALKD_CONSOLE_CONTAINER_NAME=beanstalkd-console
-BEANSTALKD_CONSOLE_HOST_PORT=2080
-
-### BEANSTALKD ############################################
-
-BEANSTALKD_HOST_PORT=11300
-
-### SELENIUM ##############################################
-
-SELENIUM_PORT=4444
-
-### MINIO #################################################
-
-MINIO_PORT=9000
-
-### ADMINER ###############################################
-
-ADM_PORT=8080
-ADM_INSTALL_MSSQL=false
-
-### PHP MY ADMIN ##########################################
-
-# Accepted values: mariadb - mysql
-
-PMA_DB_ENGINE=mysql
-
-# Credentials/Port:
-
-PMA_USER=default
-PMA_PASSWORD=secret
-PMA_ROOT_PASSWORD=secret
-PMA_PORT=8080
-
-### MAILDEV ###############################################
-
-MAILDEV_HTTP_PORT=1080
-MAILDEV_SMTP_PORT=25
-
-### VARNISH ###############################################
-
-VARNISH_CONFIG=/etc/varnish/default.vcl
-VARNISH_PORT=8080
-VARNISH_BACKEND_PORT=8888
-VARNISHD_PARAMS=-p default_ttl=3600 -p default_grace=3600
-
-### Varnish ###############################################
-
-# Proxy 1
-VARNISH_PROXY1_CACHE_SIZE=128m
-VARNISH_PROXY1_BACKEND_HOST=workspace
-VARNISH_PROXY1_SERVER=SERVER1
-
-# Proxy 2
-VARNISH_PROXY2_CACHE_SIZE=128m
-VARNISH_PROXY2_BACKEND_HOST=workspace
-VARNISH_PROXY2_SERVER=SERVER2
-
-### HAPROXY ###############################################
-
-HAPROXY_HOST_HTTP_PORT=8085
-
-### JENKINS ###############################################
-
-JENKINS_HOST_HTTP_PORT=8090
-JENKINS_HOST_SLAVE_AGENT_PORT=50000
-JENKINS_HOME=./jenkins/jenkins_home
-
-### GRAFANA ###############################################
-
-GRAFANA_PORT=3000
-
-### BLACKFIRE #############################################
-
-# Create an account on blackfire.io. Don't enable blackfire and xDebug at the same time. # visit https://blackfire.io/docs/24-days/06-installation#install-probe-debian for more info.
-INSTALL_BLACKFIRE=false
-BLACKFIRE_CLIENT_ID=<client_id>
-BLACKFIRE_CLIENT_TOKEN=<client_token>
-BLACKFIRE_SERVER_ID=<server_id>
-BLACKFIRE_SERVER_TOKEN=<server_token>
-
-### AEROSPIKE #############################################
-
-AEROSPIKE_SERVICE_PORT=3000
-AEROSPIKE_FABRIC_PORT=3001
-AEROSPIKE_HEARTBEAT_PORT=3002
-AEROSPIKE_INFO_PORT=3003
-
-## Temp solution, this should be in the dockerfile
-# for all versions "https://github.com/aerospike/aerospike-client-php/archive/master.tar.gz"
-# for php 7.2 (using this branch until the support for 7.2 on master) "https://github.com/aerospike/aerospike-client-php/archive/7.2.0-in-progress.tar.gz"
-AEROSPIKE_PHP_REPOSITORY=https://github.com/aerospike/aerospike-client-php/archive/7.2.0-in-progress.tar.gz
-
-### RETHINKDB #############################################
-
-RETHINKDB_PORT=8090
-
-### MONGODB ###############################################
-
-MONGODB_PORT=27017
-
-### CADDY #################################################
-
-CADDY_HOST_HTTP_PORT=80
-CADDY_HOST_HTTPS_PORT=443
-CADDY_HOST_LOG_PATH=./logs/caddy
-CADDY_CUSTOM_CADDYFILE=./caddy/Caddyfile
-
-### LARAVEL ECHO SERVER ###################################
-
-LARAVEL_ECHO_SERVER_PORT=6001
-
-### SOLR ##################################################
-
-SOLR_VERSION=5.5
-SOLR_PORT=8983
-SOLR_DATAIMPORTHANDLER_MYSQL=false
-
-### DRUSH_VERSION #########################################
-
-DRUSH_VERSION=9.2.3

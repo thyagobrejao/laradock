@@ -1,11 +1,15 @@
 server {
 
     listen 80;
+    listen 443;
     listen [::]:80;
 
     server_name laravel.test;
     root /var/www/laravel/public;
     index index.php index.html index.htm;
+
+    ssl_certificate     /etc/nginx/ssl/YOURLOCALDOMAIN.crt;
+    ssl_certificate_key /etc/nginx/ssl/YOURLOCALDOMAIN.key;
 
     location / {
          try_files $uri $uri/ /index.php$is_args$args;
