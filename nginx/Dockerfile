@@ -31,9 +31,9 @@ RUN apk add --no-cache openssl
 RUN mkdir /etc/nginx/ssl 2> /dev/null
 
 # generate the keys for your local domain
-RUN openssl genrsa -out "/etc/nginx/ssl/YOURLOCALDOMAIN.key" 2048 \
-    && openssl req -new -key "/etc/nginx/ssl/YOURLOCALDOMAIN.key" -out "/etc/nginx/ssl/YOURLOCALDOMAIN.csr" -subj "/CN=YOURLOCALDOMAIN/O=YOURCOMPANYNAME/C=UK" \
-    && openssl x509 -req -days 365 -in "/etc/nginx/ssl/YOURLOCALDOMAIN.csr" -signkey "/etc/nginx/ssl/YOURLOCALDOMAIN.key" -out "/etc/nginx/ssl/YOURLOCALDOMAIN.crt"
+RUN openssl genrsa -out "/etc/nginx/ssl/BREJAO.key" 2048 \
+    && openssl req -new -key "/etc/nginx/ssl/BREJAO.key" -out "/etc/nginx/ssl/BREJAO.csr" -subj "/CN=BREJAO/O=BREJAO/C=BR" \
+    && openssl x509 -req -days 365 -in "/etc/nginx/ssl/BREJAO.csr" -signkey "/etc/nginx/ssl/BREJAO.key" -out "/etc/nginx/ssl/BREJAO.crt"
 
 CMD ["nginx"]
 

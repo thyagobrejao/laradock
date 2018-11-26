@@ -1,0 +1,157 @@
+# Docs: https://caddyserver.com/docs/caddyfile
+0.0.0.0:443 {
+    root /var/www/sicop/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+# Docs: https://caddyserver.com/docs/caddyfile
+motobook.test:443 {
+    root /var/www/motobook/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+demandas.test:443 {
+    root /var/www/demandas/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+arquetipo.test:443 {
+    root /var/www/ArquetipoPHP/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+
+congresso2019.test:443 {
+    root /var/www/congresso2019/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+
+blog_conselho.test:443 {
+    root /var/www/blog_conselho/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+
+gestao_ecc.test:443 {
+    root /var/www/gestao_ecc/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+novomantis.test:443 {
+    root /var/www/novoMantis/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
+
+mantis4.test:443 {
+    root /var/www/mantisbt-2.18.0
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls self_signed
+}
